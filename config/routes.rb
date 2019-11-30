@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "posts/new" => "posts#new"
   post "posts/create" => "posts#create"
   get "posts/:id" => "posts#show"
+  post "posts/:id/destroy" => "posts#destroy"
 
   get "/" => "home#top"
   get "about" => "home#about"
