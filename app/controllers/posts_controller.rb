@@ -7,10 +7,34 @@ class PostsController < ApplicationController
     @id = params[:id]
   end
   def new
+    @post = Post.new(content:params[:content])
+    if @post.save
+      flash[:notice] = "編集内容を保存完了しました"
+      redirect_to("/posts/index")
+    else
+      render("/posts/new")
+    end
   end
   def create
     @post = Post.new(content:params[:content])
-    @post.save
-    redirect_to("/posts/index")
+    if @post.save
+      flash[:notice] = "新規登録完了しました"
+      redirect_to("/posts/index")
+    else
+      render("/posts/new")
+    end
+  end
+  def edit
+    @post = Post.find_by(id: params[:id])
+  end
+  def update
+    @post = Post.find_by(id: params[:id])
+    @post.content=params[:content]
+    if @post.save
+      flash[:notice]="編集完了しました"
+      redirect_to("/posts/#{@post.id}")
+    else
+      render("/posts/edit")
+    end
   end
 end
