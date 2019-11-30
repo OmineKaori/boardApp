@@ -15,9 +15,11 @@ class UsersController < ApplicationController
     @user = User.new(
       name: params[:name],
       email: params[:email],
+      password: params[:password],
       image_name: "default_image.png"
     )
     if @user.save
+      session[:user_id]=@user.id
       flash[:notice]="新規登録完了です"
       redirect_to("/users/index")
     else
@@ -54,6 +56,7 @@ class UsersController < ApplicationController
       password: params[:password]
     )
     if @user
+      session[:user_id]=@user.id
       flash[:notice] = "ログインしました"
       redirect_to("/posts/index")
     else
@@ -62,5 +65,11 @@ class UsersController < ApplicationController
       @password = params[:password]
       render("users/login_form")
     end
+  end
+
+  def logout
+    session[:user_id]=nil
+    flash[:notice]="ログアウトしました"
+    redirect_to("/login")
   end
 end
