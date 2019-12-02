@@ -23,10 +23,10 @@
           <% if @current_user %>
           </li>
           <li>
-            <%= link_to("投稿一覧", "/posts/index") %>
+            <%= link_to("スレッド一覧", "/posts/index") %>
           </li>
           <li>
-            <%= link_to("新規投稿", "/posts/new") %>
+            <%= link_to("新規スレッド", "/posts/new") %>
           </li>
           <li>
             <%= link_to("ユーザー一覧", "/users/index") %>
@@ -40,7 +40,7 @@
 
           <% else %>
           <li>
-            <%= link_to("TweetAppとは", "/about") %>
+            <%= link_to("Geekチャンネルとは", "/about") %>
           </li>
           <li>
             <%= link_to("新規登録", "/signup") %>

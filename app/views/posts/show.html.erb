@@ -6,7 +6,7 @@
         <%= link_to(@user.name,"/users/#{@user.id}") %>
       </div>
       <p>
-      <%= @post.content %>
+        <%= @post.content %>
       </p>
       <div class="post-time">
         <%= @post.created_at %>
@@ -14,19 +14,52 @@
       <% if Like.find_by(user_id:@current_user.id,post_id:@post.id)%>
         <%= link_to("/likes/#{@post.id}/destroy",{method:"post"}) do %>
           <span class="fa fa-heart like-btn-unlike"></span>
-          <% end %>
+        <% end %>
       <% else %>
         <%= link_to("/likes/#{@post.id}/create",{method: "post"}) do %>
           <span class="fa fa-heart like-btn"></span>
-          <% end%>
+        <% end%>
       <% end %>
       <%= @likes_count %>
       <% if @post.user_id==@current_user.id %>
-      <div class="post-menus">
-        <%= link_to("編集", "/posts/#{@post.id}/edit") %>
-        <%= link_to("削除", "/posts/#{@post.id}/destroy",{method:"post"}) %>
-      </div>
+        <div class="post-menus">
+          <%= link_to("編集", "/posts/#{@post.id}/edit") %>
+          <%= link_to("削除", "/posts/#{@post.id}/destroy",{method:"post"}) %>
+        </div>
       <% end %>
+    </div>
+    <% @replies.each do |reply| %>
+    <% reply_user=User.find_by(id:reply.user_id) %>
+      <div class="posts-index-item">
+        <div class="post-left">
+          <img src="<%= "/user_images/#{reply_user.image_name}" %>">
+        </div>
+        <div class="post-right">
+          <div class="post-user-name">
+            <%= link_to(reply_user.name,"/users/#{reply.user_id}") %>
+          </div>
+          <%= link_to(reply.content,"/users/#{reply.user_id}") %>
+        </div>
+        <% if reply_user.id==@current_user.id %>
+          <div class="post-menus">
+            <%= link_to("編集", "/replies/#{reply.id}/edit") %>
+            <%= link_to("削除", "/replies/#{reply.id}/destroy",{method:"post"}) %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="form">
+      <div class="form-body">
+        <% @reply.errors.full_messages.each do |message| %>
+        <div class="form-error">
+          <%= message %>
+        </div>
+        <% end %>
+        <%= form_tag("/replies/#{@reply.id}/create") do %>
+        <textarea name="content" value="<%= @reply.content %>"></textarea>
+        <input type="submit" value="投稿">
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
