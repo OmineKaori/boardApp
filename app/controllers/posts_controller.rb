@@ -11,7 +11,6 @@ class PostsController < ApplicationController
     @user = @post.user
     @likes_count=Like.where(post_id:@post.id).count
     @replies=Reply.where(post_id:@post.id)
-    @reply = Reply.new
   end
 
   def new
@@ -21,7 +20,13 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(content:params[:content],user_id:@current_user.id)
     if @post.save
-      flash[:notice] = "新規登録完了しました"
+      flash[:notice] = "新規スレッドを作りました"
+      if params[:image]
+        @post.image_name="#{@post.id}.jpg"
+        image = params[:image]
+        File.binwrite("public/post_images/#{@post.image_name}",image.read)
+      end
+      @post.save
       redirect_to("/posts/index")
     else
       render("/posts/new")
@@ -58,4 +63,24 @@ class PostsController < ApplicationController
       redirect_to("/posts/index")
     end
   end
+
+  def create_reply
+    @reply = Reply.new(content:params[:content],user_id:@current_user.id,post_id:params[:post_id])
+    if @reply.save
+      flash[:notice] = "返信しました"
+      @reply.save
+      redirect_to("/posts/#{params[:post_id]}}")
+    end
+  end
+
+  def destroy_reply
+    @reply = Reply.find_by(id: params[:id])
+    post_id=@reply.post_id
+    if @reply.destroy
+      flash[:notice]="削除しました"
+      redirect_to("/posts/#{post_id}")
+    end
+  end
+
+
 end

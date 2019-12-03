@@ -28,6 +28,11 @@
         </div>
       <% end %>
     </div>
+    <% if @post.image_name!=nil %>
+    <p>
+      <img src="<%= "/post_images/#{@post.image_name}" %>">
+    </p>
+    <% end %>
     <% @replies.each do |reply| %>
     <% reply_user=User.find_by(id:reply.user_id) %>
       <div class="posts-index-item">
@@ -38,11 +43,10 @@
           <div class="post-user-name">
             <%= link_to(reply_user.name,"/users/#{reply.user_id}") %>
           </div>
-          <%= link_to(reply.content,"/users/#{reply.user_id}") %>
+          <%= reply.content %>
         </div>
         <% if reply_user.id==@current_user.id %>
           <div class="post-menus">
-            <%= link_to("編集", "/replies/#{reply.id}/edit") %>
             <%= link_to("削除", "/replies/#{reply.id}/destroy",{method:"post"}) %>
           </div>
         <% end %>
@@ -50,13 +54,8 @@
     <% end %>
     <div class="form">
       <div class="form-body">
-        <% @reply.errors.full_messages.each do |message| %>
-        <div class="form-error">
-          <%= message %>
-        </div>
-        <% end %>
-        <%= form_tag("/replies/#{@reply.id}/create") do %>
-        <textarea name="content" value="<%= @reply.content %>"></textarea>
+        <%= form_tag("/replies/#{@post.id}/create") do %>
+        <textarea name="content" value="@reply.content"></textarea>
         <input type="submit" value="投稿">
         <% end %>
       </div>
