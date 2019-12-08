@@ -14,11 +14,11 @@
   object-fit: cover;
 }
 
-.post-user-name a {
+.container a {
   font-weight: 600;
 }
 
-.post-user-name a:hover {
+.container a:hover {
   color: #3ecdc6;
 }
 
@@ -44,13 +44,6 @@
   background-color: white;
   box-shadow: 0 2px 6px #c1ced7;
   overflow: hidden;
-}
-.posts-show-item a {
-  font-weight: 600;
-}
-
-.posts-show-item a:hover {
-  color: #3ecdc6;
 }
 
 .posts-show-item img {
