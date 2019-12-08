@@ -6,7 +6,7 @@
         <%= link_to(@user.name,"/users/#{@user.id}") %>
       </div>
       <p>
-        <%= @post.content %>
+        <%= text_url_to_link(@post.content).html_safe %>
       </p>
       <div class="post-time">
         <%= @post.created_at %>
@@ -43,7 +43,7 @@
           <div class="post-user-name">
             <%= link_to(reply_user.name,"/users/#{reply.user_id}") %>
           </div>
-          <%= reply.content %>
+          <%= text_url_to_link(reply.content).html_safe %>
         </div>
         <% if reply_user.id==@current_user.id %>
           <div class="post-menus">

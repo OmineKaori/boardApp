@@ -45,6 +45,13 @@
   box-shadow: 0 2px 6px #c1ced7;
   overflow: hidden;
 }
+.posts-show-item a {
+  font-weight: 600;
+}
+
+.posts-show-item a:hover {
+  color: #3ecdc6;
+}
 
 .posts-show-item img {
   width: 60px;
