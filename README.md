@@ -1,24 +1,13 @@
-# README
+# Geekチャンネル作ったよ！
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### 参加はここから↓↓
+https://warm-river-41374.herokuapp.com/
 
-Things you may want to cover:
+## 機能
+* ログイン/ログアウト
+* スレッド新規投稿・編集・削除
+* スレッド返信・削除
+* 投稿内容のurlを検出してリンクに変更
 
-* Ruby version
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
