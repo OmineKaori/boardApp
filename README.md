@@ -1,6 +1,6 @@
 # Geekチャンネル作ったよ！
 
-## 参加はここから↓↓
+### 参加はここから↓↓
 https://warm-river-41374.herokuapp.com/
 
 ## 機能
